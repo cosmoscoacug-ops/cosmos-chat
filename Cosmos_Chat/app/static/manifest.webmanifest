@@ -1,0 +1,9 @@
+{
+  "name": "Cosmos Chat",
+  "short_name": "Cosmos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1117",
+  "theme_color": "#7c5cff",
+  "icons": []
+}

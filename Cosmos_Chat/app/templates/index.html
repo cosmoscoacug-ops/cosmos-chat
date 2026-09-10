@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <title>Cosmos Chat</title>
+  <link rel="manifest" href="/static/manifest.webmanifest" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div id="toastHost"></div>
+
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-mark">C</div>
+      <h1>Cosmos Chat</h1>
+      <p>Your private space for friends, groups and calls.</p>
+      <div class="auth-tabs">
+        <button class="tab active" data-auth-tab="login">Sign in</button>
+        <button class="tab" data-auth-tab="register">Create account</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>Username<input id="loginUsername" autocomplete="username" required /></label>
+        <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required /></label>
+        <button class="primary wide">Sign in</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <label>Display name<input id="registerName" required maxlength="64" /></label>
+        <label>Username<input id="registerUsername" required minlength="3" maxlength="32" /></label>
+        <label>Gmail or email address<input id="registerEmail" type="email" required placeholder="you@gmail.com" /></label>
+        <label>Password<input id="registerPassword" type="password" required minlength="6" /></label>
+        <button class="primary wide">Create account</button>
+      </form>
+      <div id="authError" class="error"></div>
+    </div>
+  </section>
+
+  <main id="appShell" class="app-shell hidden">
+    <aside class="sidebar">
+      <header class="side-header">
+        <button id="profileBtn" class="avatar-btn"><span id="meAvatar" class="avatar">C</span></button>
+        <div class="side-actions">
+          <button id="newChatBtn" title="New chat">✚</button>
+          <button id="newGroupBtn" title="New group">👥</button>
+          <button id="contactsBtn" title="Contacts">☎</button>
+          <button id="settingsBtn" title="Settings">⚙</button>
+        </div>
+      </header>
+
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="chatSearch" placeholder="Search chats" />
+      </div>
+
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="unread">Unread</button>
+        <button class="filter" data-filter="groups">Groups</button>
+        <button class="filter" data-filter="archived">Archived</button>
+      </div>
+
+      <div id="chatList" class="chat-list"></div>
+    </aside>
+
+    <section class="conversation">
+      <div id="emptyState" class="empty-state">
+        <div class="empty-logo">C</div>
+        <h2>Cosmos Chat</h2>
+        <p>Select a conversation or start a new one.</p>
+      </div>
+
+      <div id="chatView" class="chat-view hidden">
+        <header class="chat-header">
+          <button id="backBtn" class="mobile-only">←</button>
+          <div id="chatAvatar" class="avatar">C</div>
+          <div class="chat-heading">
+            <strong id="chatTitle">Chat</strong>
+            <small id="chatStatus">offline</small>
+          </div>
+          <div class="chat-actions">
+            <button id="voiceCallBtn" title="Voice call">☎</button>
+            <button id="videoCallBtn" title="Video call">▣</button>
+            <button id="messageSearchBtn" title="Search messages">⌕</button>
+            <button id="chatMenuBtn" title="Chat menu">⋮</button>
+          </div>
+        </header>
+
+        <div id="messageSearchBar" class="message-search hidden">
+          <input id="messageSearchInput" placeholder="Search in this conversation" />
+          <button id="messageSearchClose">✕</button>
+        </div>
+
+        <div id="wallpaperLayer" class="wallpaper-layer">
+          <div id="messages" class="messages"></div>
+        </div>
+
+        <div id="replyBar" class="reply-bar hidden">
+          <div><small>Replying to</small><strong id="replyText"></strong></div>
+          <button id="cancelReply">✕</button>
+        </div>
+
+        <footer class="composer">
+          <button id="emojiBtn" title="Emoji">☺</button>
+          <button id="attachBtn" title="Attach">＋</button>
+          <input id="fileInput" type="file" hidden />
+          <textarea id="messageInput" rows="1" maxlength="8000" placeholder="Message"></textarea>
+          <button id="sendBtn" class="send-btn" title="Send">➤</button>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div id="modal" class="modal"></div>
+  </div>
+
+  <div id="emojiPanel" class="emoji-panel hidden">
+    <button>😀</button><button>😂</button><button>😍</button><button>😎</button>
+    <button>👍</button><button>❤️</button><button>🔥</button><button>🎉</button>
+    <button>🙏</button><button>💯</button><button>🤝</button><button>😮</button>
+  </div>
+
+  <div id="callOverlay" class="call-overlay hidden">
+    <div class="call-card">
+      <div id="callAvatar" class="call-avatar">C</div>
+      <h2 id="callTitle">Calling…</h2>
+      <p id="callStatus">Connecting</p>
+      <video id="remoteVideo" autoplay playsinline></video>
+      <video id="localVideo" autoplay playsinline muted></video>
+      <div class="call-controls">
+        <button id="muteBtn">🎙</button>
+        <button id="cameraBtn">📷</button>
+        <button id="hangupBtn" class="danger">☎</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
